@@ -463,7 +463,8 @@ if @script_console_running
     if name.nil?
       list = File.expand_path("vendor/plugins")
       list_ary = Dir.entries(list).select{|x| x[0..0] != "."}
-      list_ary << ["===", "#{list_ary.length} Plugins"]
+      footer = "="*list_ary.last.length
+      list_ary << [footer, "#{list_ary.length} Plugins"]
       y list_ary.flatten!
     else
       # these are special cmds that you can pass instead of the name of the plugin
@@ -499,10 +500,15 @@ if @script_console_running
                 uses_svn = File.exists?(File.join(update_path, ".svn"))
                 not_versioned = !uses_git && !uses_svn
                 
-                puts "STATUS OF : #{d}"
+                repo_type = "[svn]" if uses_svn
+                repo_type = "[git]" if uses_git
+                repo_type = "[not versioned]" if not_versioned
+                
+                puts "STATUS OF : #{d} #{repo_type}"
                 system("cd #{update_path};git st") if uses_git
                 svn.st(update_path) if uses_svn
                 puts "#{d} not versioned" if not_versioned
+                puts "--"
               end
             end
           
