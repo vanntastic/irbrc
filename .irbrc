@@ -566,11 +566,15 @@ if @script_console_running
   # displays all the mailer files
   def mailers
     list = Dir.glob File.join("app/models","*_mailer.rb")
-    list.map!{ |mailer| mailer.split("/").last }
-    list.map!{ |mailer| mailer.split(".").first }
-    list.map!{ |mailer| mailer.camelize }
-    list << [("="*list.last.length),"#{list.length} Mailers"]
-    y list.flatten!
+    if list.length == 0
+      return puts "There are no Mailers"
+    else
+      list.map!{ |mailer| mailer.split("/").last }
+      list.map!{ |mailer| mailer.split(".").first }
+      list.map!{ |mailer| mailer.camelize }
+      list << [("="*list.last.length),"#{list.length} Mailers"]
+      y list.flatten!
+    end
   end
 
   #displays a list of controllers
