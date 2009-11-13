@@ -884,6 +884,21 @@ if @script_console_running
         system("git st")
       end
       
+      # git.co
+      def co(branch)
+        system("git co #{branch}")
+      end
+      
+      # alias for :
+      #   git co master
+      #   git pull . [branch]
+      #   git co [branch]
+      def merge(branch)
+        co "master"
+        system("git pull . #{branch}")
+        co branch
+      end
+      
       # git.ci 'msg'
       def ci(msg=nil)
         cmd = msg.nil? ? "git add .;git commit" : "git add .;git commit -m '#{msg}'"
