@@ -902,7 +902,11 @@ if @script_console_running
       #   git co master
       #   git pull . [branch]
       #   git co [branch]
-      def merge(branch)
+      # branch defaults to the current branch, so you can simply say:
+      #   git.merge # => merges the current branch with master
+      def merge(branch=nil)
+        branch ||= `git branch`.gsub("\n","").split("*").last.strip
+        puts "Merging #{branch} with master..."
         co "master"
         system("git pull . #{branch}")
         co branch
