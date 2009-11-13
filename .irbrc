@@ -889,6 +889,15 @@ if @script_console_running
         system("git co #{branch}")
       end
       
+      # creates a new branch and switches it
+      def new_branch(name=nil)
+        return "git.new_branch [name of new branch]" if name.nil?
+        co "-b #{name}"
+      end
+      
+      # alias for branch
+      def b; system("git branch"); end
+      
       # alias for :
       #   git co master
       #   git pull . [branch]
