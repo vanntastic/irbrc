@@ -948,7 +948,9 @@ if @script_console_running
       end
       
       # git.log
+      # will use tig if it's available...
       def log(path=nil)
+        return system("tig") if system("tig")
         path.nil? ? system('git log') : system("git log #{path}")
       end
   
