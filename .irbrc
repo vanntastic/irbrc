@@ -874,7 +874,7 @@ if @script_console_running
       arg = args.join(" ")
       cmd = "git #{cmd} #{arg}"
     elsif args.blank?
-      cmd = "git [*cmd] or git.[st|ci|push|config]"
+      cmd = "git [*cmd] or git.[st|ci|push|config|merge|co|b|new_branch]"
     end
     
     cmd.instance_eval do
